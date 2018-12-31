@@ -15,7 +15,7 @@ export default new Router({
     },
     {
       path: '/',
-      redirect: '/index/vendor-list',
+      redirect: '/home/vendor-list',
     },
     {
       path: '/home',

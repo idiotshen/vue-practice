@@ -20,7 +20,7 @@
 
         <div class="action-wrap">
           <div class="pwd-action-wrap">
-            <el-checkbox v-model="checked" text-color="#FFF">记住密码</el-checkbox>
+            <el-checkbox text-color="#FFF">记住密码</el-checkbox>
             <a class="forget-pwd-action">忘记密码</a>
           </div>
           <div class="login-action-wrap">
