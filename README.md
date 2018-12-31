@@ -1,6 +1,6 @@
 # vuedemo
 
-> A Vue.js project
+> A Vue.js project vue的实践项目 正在施工中  由于实习还有毕业设计的事情  目测进度会很慢
 
 ## Build Setup
 
