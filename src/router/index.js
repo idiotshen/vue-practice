@@ -4,6 +4,8 @@ import Login from '../view/Login';
 import Home from '../view/home/Home.vue';
 import VendorList from '../view/vendorList/VendorList.vue';
 import NewVendor from '../view/newVendor/NewVendor.vue';
+import WarehouseList from '../view/warehouseList/WarehouseList.vue';
+import NewWarehouse from '../view/newWarehouse/NewWarehouse.vue';
 
 Vue.use(Router);
 
@@ -15,7 +17,7 @@ export default new Router({
     },
     {
       path: '/',
-      redirect: '/home/vendor-list',
+      redirect: '/home/warehouse-list',
     },
     {
       path: '/home',
@@ -28,6 +30,14 @@ export default new Router({
         {
           path: 'new-vendor',
           component: NewVendor,
+        },
+        {
+          path: 'warehouse-list',
+          component: WarehouseList,
+        },
+        {
+          path: 'new-warehouse',
+          component: NewWarehouse,
         },
       ],
     },

@@ -6,34 +6,12 @@
     <el-menu background-color="#3f4d67" text-color="#FFFFFF">
       <el-menu-item index="1">
         <i class="el-icon-menu"></i>
-        <router-link slot="title" to="/">首页</router-link>
+        <router-link slot="title" to="/">仓库管理</router-link>
       </el-menu-item>
       <el-menu-item index="2">
         <i class="el-icon-document"></i>
-        <router-link slot="title" to="/home/vendor-list">我的供应商清单</router-link>
+        <router-link slot="title" to="/home/vendor-list">产品管理</router-link>
       </el-menu-item>
-      <el-menu-item index="3">
-        <i class="el-icon-tickets"></i>
-        <router-link slot="title" to="">我的任务清单</router-link>
-      </el-menu-item>
-      <el-submenu index="4">
-        <template slot="title">
-          <i class="el-icon-setting"></i>
-          <span>管理</span>
-        </template>
-        <el-menu-item index="5">
-          <router-link slot="title" to="">黑名单</router-link>
-        </el-menu-item>
-        <el-menu-item index="6">
-          <router-link slot="title" to="">利益冲突</router-link>
-        </el-menu-item>
-        <el-menu-item index="7">
-          <router-link slot="title" to="">关联方</router-link>
-        </el-menu-item>
-        <el-menu-item index="8">
-          <router-link slot="title" to="">用户</router-link>
-        </el-menu-item>
-      </el-submenu>
     </el-menu>
   </div>
 </template>
