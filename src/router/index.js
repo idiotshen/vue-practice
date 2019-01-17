@@ -24,14 +24,6 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: 'vendor-list',
-          component: VendorList,
-        },
-        {
-          path: 'new-vendor',
-          component: NewVendor,
-        },
-        {
           path: 'warehouse-list',
           component: WarehouseList,
         },

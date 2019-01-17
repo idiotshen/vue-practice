@@ -1,39 +1,83 @@
 <template>
-  <el-table :data="productList">
-    <el-table-column property="name" label="产品名称" width="150"></el-table-column>
-    <el-table-column property="singleCover" label="单个占地" width="150"></el-table-column>
-    <el-table-column label="产品数量" width="200">
-      <template slot-scope="scope">
-        <span @click="handleMinus(scope.$index, scope.row)">
-          <i class="el-icon-remove-outline"></i>
-        </span>
-        <span>{{ scope.row.count }}</span>
-        <span @click="handleAdd(scope.$index, scope.row)">
-          <i class="el-icon-circle-plus-outline"></i>
-        </span>
-      </template>
-    </el-table-column>
-    <el-table-column property="totalCover" label="总占地"></el-table-column>
-  </el-table>
+  <div>
+    <el-table :data="productListMock" show-summary :summary-method="getSummaries">
+      <el-table-column property="name" label="产品名称" width="150"></el-table-column>
+      <el-table-column property="singleCover" label="单个占地" width="150"></el-table-column>
+      <el-table-column label="产品数量" width="200">
+        <template slot-scope="scope">
+          <span @click="handleCount(scope.$index, +1)">
+            <i class="el-icon-remove-outline"></i>
+          </span>
+          <span>{{ scope.row.count }}</span>
+          <span @click="handleCount(scope.$index, -1)">
+            <i class="el-icon-circle-plus-outline"></i>
+          </span>
+        </template>
+      </el-table-column>
+      <el-table-column label="总占地">
+        <template slot-scope="scope">
+          <span>{{ scope.row.totalCover }}</span>
+          <span>
+            <i v-bind:class="scope.row.compareIcon"></i>
+          </span>
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="action-wrapper">
+    <el-button type="primary" id="update-product-count">确定</el-button>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  props: ['productList'],
+  props: ['productList', 'totalCover'],
 
   data() {
-    return {};
+    return {
+      productListMock: this.productList.map(value => Object.assign({ compareIcon: '' }, value)),
+      upIcon: 'el-icon-caret-top',
+      downIcon: 'el-icon-caret-bottom',
+    };
   },
   methods: {
-    handleMinus(index) {
-      this.productList[index].count -= 1;
-      this.productList[index].totalCover = this.productList[index].count * this.productList[index].singleCover;
+    handleCount(index, number) {
+      const product = this.productListMock[index];
+      product.count -= number;
+      product.totalCover = product.count * product.singleCover;
+
+      if (product.totalCover > this.productList[index].totalCover) {
+        product.compareIcon = this.upIcon;
+      } else if (product.totalCover < this.productList[index].totalCover) {
+        product.compareIcon = this.downIcon;
+      } else {
+        product.compareIcon = '';
+      }
     },
 
-    handleAdd(index) {
-      this.productList[index].count += 1;
-      this.productList[index].totalCover = this.productList[index].count * this.productList[index].singleCover;
+    getSummaries() {
+      const sums = [];
+      sums[0] = '仓库总占地';
+      sums[1] = this.totalCover;
+      sums[2] = '已用占地';
+      sums[3] = this.warehouseUsedCover;
+      return sums;
+    },
+  },
+  computed: {
+    warehouseUsedCover() {
+      return this.productListMock.reduce(
+        (pre, current) => pre + current.totalCover, 0,
+      );
     },
   },
 };
 </script>
+
+<style scope>
+  .action-wrapper {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+</style>
