@@ -6,11 +6,13 @@ import VueParticles from 'vue-particles';
 import App from './App';
 import router from './router';
 import 'element-ui/lib/theme-chalk/index.css';
+import Mock from './mock/index';
 
 Vue.use(Element);
 Vue.use(VueParticles);
 Vue.config.productionTip = false;
 
+Mock.mockData();
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -10,7 +10,7 @@
       </el-menu-item>
       <el-menu-item index="2">
         <i class="el-icon-document"></i>
-        <router-link slot="title">产品管理</router-link>
+        <router-link slot="title" to='/'>产品管理</router-link>
       </el-menu-item>
     </el-menu>
   </div>

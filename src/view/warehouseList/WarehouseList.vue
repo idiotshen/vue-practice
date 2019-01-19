@@ -9,8 +9,8 @@
       </div>
     </div>
     <div class="vendor-table-wrapper">
-      <el-table :data="tableData3" style="width: 100%;" height="500">
-        <el-table-column fixed prop="warehouseName" label="仓库名称" width="350"></el-table-column>
+      <el-table :data="warehouseList" style="width: 100%;" height="500">
+        <el-table-column fixed prop="name" label="仓库名称" width="350"></el-table-column>
         <el-table-column prop="location" label="仓库地址" width="350"></el-table-column>
         <el-table-column prop="totalCover" label="仓库容量" width="150"></el-table-column>
         <el-table-column prop="hasUsed" label="仓库已用" width="150"></el-table-column>
@@ -25,21 +25,27 @@
         </el-table-column>
       </el-table>
     </div>
-    <warehouse-product-dialog></warehouse-product-dialog>
-    <el-dialog title="收货地址" :visible.sync="dialogVisible">
-      <warehouse-product-table :productList="productList" :totalCover="totalCover"></warehouse-product-table>
-    </el-dialog>
+    <warehouse-product-dialog :warehouseId='warehouseId' :dialogVisible="dialogVisible" @closeDialog="closeDialog">
+    </warehouse-product-dialog>
   </div>
 </template>
 
 <script>
-import WarehouseProductTable from '../warehouseList/WarehouseProductTable';
+import WarehouseProductDialog from '../warehouseList/WarehouseProductDialog';
+import warehouseApi from '../../api/warehouse.js';
 
 export default {
   name: 'WarehouseList',
 
   components: {
-    'warehouse-product-table': WarehouseProductTable,
+    'warehouse-product-dialog': WarehouseProductDialog,
+  },
+
+  mounted() {
+    warehouseApi.warehouseList()
+      .then((res) => {
+        this.warehouseList = res.list;
+      });
   },
 
   data() {
@@ -48,134 +54,21 @@ export default {
 
       warehouseId: '',
 
-      productList: [
-        {
-          name: '产品1',
-          count: 12,
-          singleCover: 1,
-          totalCover: 12,
-        },
-        {
-          name: '产品1',
-          count: 12,
-          singleCover: 1,
-          totalCover: 12,
-        },
-        {
-          name: '产品1',
-          count: 12,
-          singleCover: 1,
-          totalCover: 12,
-        },
-        {
-          name: '产品1',
-          count: 12,
-          singleCover: 1,
-          totalCover: 12,
-        },
-      ],
+      productList: [],
 
       totalCover: 30,
 
-      tableData3: [
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-        {
-          warehouseName: '仓库1',
-          location: '上海',
-          province: '上海',
-          totalCover: '30',
-          hasUsed: '15',
-        },
-      ],
+      warehouseList: [],
     };
   },
 
   methods: {
     newVendor() {
       this.$router.push('/home/new-warehouse');
+    },
+
+    closeDialog() {
+      this.dialogVisible = false;
     },
   },
 };
