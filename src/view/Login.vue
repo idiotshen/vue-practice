@@ -2,18 +2,16 @@
   <div class="bg">
     <div class="login-wrap">
       <div class="title-wrap">
-        <h2 class="title">XXX</h2>
-        <h2 class="title">XXXXXXXXXXX系统</h2>
+        <h2 class="title">思索仓库管理系统</h2>
       </div>
-
       <div class="form-wrap">
         <div class="input-wrap">
           <el-form ref="form" :model="form">
             <el-form-item>
-              <el-input v-model="form.name" placeholder="请输入用户名"></el-input>
+              <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-input v-model="form.pwd" placeholder="密码"></el-input>
+              <el-input v-model="form.password" placeholder="密码"></el-input>
             </el-form-item>
           </el-form>
         </div>
@@ -24,10 +22,9 @@
             <a class="forget-pwd-action">忘记密码</a>
           </div>
           <div class="login-action-wrap">
-            <el-button type="primary">登陆</el-button>
+            <el-button type="primary" @click="onSubmit">登陆</el-button>
           </div>
         </div>
-
       </div>
     </div>
     <vue-particles
@@ -57,15 +54,18 @@ export default {
   data() {
     return {
       form: {
-        name: '',
-        pwd: '',
+        username: '',
+        password: '',
       },
     };
   },
 
   methods: {
     onSubmit() {
-      alert('登陆成功');
+      this.$store.dispatch('login', this.form)
+        .then(() => {
+          this.$router.push({ path: '/' });
+        });
     },
   },
 };
@@ -106,6 +106,8 @@ export default {
     height: 100px;
     line-height: 50px;
     margin-top: 15px;
+    display: flex;
+    align-items: center;
   }
 
   .bg .title-wrap .title{

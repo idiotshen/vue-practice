@@ -4,9 +4,10 @@ import Vue from 'vue';
 import Element from 'element-ui';
 import VueParticles from 'vue-particles';
 import App from './App';
-import router from './router';
+import { router } from './router';
 import 'element-ui/lib/theme-chalk/index.css';
 import Mock from './mock/index';
+import store from './store/index';
 
 Vue.use(Element);
 Vue.use(VueParticles);
@@ -17,6 +18,7 @@ Mock.mockData();
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>',
 });

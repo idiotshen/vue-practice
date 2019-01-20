@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 import { MessageBox } from 'element-ui';
 
@@ -37,7 +38,7 @@ import { MessageBox } from 'element-ui';
  *
  * */
 
-axios.defaults.baseURL = '';
+axios.defaults.baseURL = 'http://localhost:8081';
 
 export default (method, url, params, config = {}, autoErrorRes = true, autoErrorData = true) => {
   const args = Object.assign({
@@ -47,7 +48,9 @@ export default (method, url, params, config = {}, autoErrorRes = true, autoError
   }, config);
 
   return axios(args).then((res) => {
-    if (!res.data.success) {
+    console.log(res);
+
+    if (res.data.code !== 200) {
       res.data.error = res.data.error || {};
       console.error(res.data.error);
       if (autoErrorData) {
@@ -63,7 +66,7 @@ export default (method, url, params, config = {}, autoErrorRes = true, autoError
   }, (error) => {
     console.error(error);
     if (autoErrorRes) {
-      const errStatus = error.response.status || -100;
+      const errStatus = error.response.code || -100;
       MessageBox.alert('网络请求异常，请联系管理员！', `请求异常：${errStatus}`, { confirmButtonText: '确定' });
     }
     return Promise.reject(error);
