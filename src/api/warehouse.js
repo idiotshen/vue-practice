@@ -2,10 +2,10 @@ import request from '../axios/request';
 
 export default {
   warehouseList() {
-    return request('get', '/warehouseList');
+    return request('get', '/warehouse');
   },
 
-  warehouse() {
-
+  createWarehouse({ name, location, totalCover }) {
+    return request('post', '/warehouse', { name, location, totalCover });
   },
 };

@@ -32,7 +32,7 @@
 
 <script>
 import WarehouseProductDialog from '../warehouseList/WarehouseProductDialog';
-import warehouseApi from '../../api/warehouse';
+import warehouse from '../../api/warehouse';
 
 export default {
   name: 'WarehouseList',
@@ -41,12 +41,12 @@ export default {
     'warehouse-product-dialog': WarehouseProductDialog,
   },
 
-  // mounted() {
-  //   warehouseApi.warehouseList()
-  //     .then((res) => {
-  //       this.warehouseList = res.list;
-  //     });
-  // },
+  mounted() {
+    warehouse.warehouseList()
+      .then((warehouseList) => {
+        this.warehouseList = warehouseList;
+      });
+  },
 
   data() {
     return {
