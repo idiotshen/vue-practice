@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="vendor-table-wrapper">
-      <el-table :data="warehouseList" style="width: 100%;" height="500">
+      <el-table :data="warehouseList" style="width: 100%;">
         <el-table-column fixed prop="name" label="仓库名称" width="350"></el-table-column>
         <el-table-column prop="location" label="仓库地址" width="350"></el-table-column>
         <el-table-column prop="totalCover" label="仓库容量" width="150"></el-table-column>
@@ -19,19 +19,34 @@
             <el-input size="mini" placeholder="输入关键字搜索"/>
           </template>
           <template slot-scope="scope">
-            <el-button @click="dialogVisible = true" type="text" size="small">查看在库列表</el-button>
+            <el-button @click="warehouseProDialogVisible = true"
+              type="text" size="small">
+              查看在库列表
+            </el-button>
             <el-button type="text" size="small">编辑</el-button>
+            <el-button @click="warehouseInputDialogVisible = true"
+              type="text" size="small">
+              入库
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
-    <warehouse-product-dialog :warehouseId='warehouseId' :dialogVisible="dialogVisible" @closeDialog="closeDialog">
+    <warehouse-product-dialog :warehouseId='warehouseId'
+      :warehouseProDialogVisible="warehouseProDialogVisible"
+      @closeWarehouseProDialog="closeWarehouseProDialog">
     </warehouse-product-dialog>
+    <warehouse-input-dialog
+      @closeWarehouseInputDialog="closeWarehouseInputDialog"
+      :warehouseInputDialogVisible="warehouseInputDialogVisible">
+    </warehouse-input-dialog>
   </div>
 </template>
 
 <script>
-import WarehouseProductDialog from '../warehouseList/WarehouseProductDialog';
+import WarehouseProductDialog from './WarehouseProductDialog';
+import WarehouseInputDialog from './WarehouseInputDialog';
+
 import warehouse from '../../api/warehouse';
 
 export default {
@@ -39,6 +54,7 @@ export default {
 
   components: {
     'warehouse-product-dialog': WarehouseProductDialog,
+    'warehouse-input-dialog': WarehouseInputDialog,
   },
 
   mounted() {
@@ -50,7 +66,9 @@ export default {
 
   data() {
     return {
-      dialogVisible: false,
+      warehouseProDialogVisible: false,
+
+      warehouseInputDialogVisible: false,
 
       warehouseId: '',
 
@@ -67,8 +85,12 @@ export default {
       this.$router.push('/home/new-warehouse');
     },
 
-    closeDialog() {
-      this.dialogVisible = false;
+    closeWarehouseProDialog() {
+      this.warehouseProDialogVisible = false;
+    },
+
+    closeWarehouseInputDialog() {
+      this.warehouseInputDialogVisible = false;
     },
   },
 };

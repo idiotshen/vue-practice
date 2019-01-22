@@ -1,5 +1,6 @@
 <template>
-  <el-dialog title="在库列表" :visible.sync="dialogVisible" @close="closeDialog">
+  <el-dialog title="在库列表" :visible.sync="warehouseProDialogVisible"
+    @close="closeWarehouseProDialog">
     <el-table :data="productListMock" show-summary :summary-method="getSummaries">
       <el-table-column property="name" label="产品名称" width="150"></el-table-column>
       <el-table-column property="singleCover" label="单个占地" width="150"></el-table-column>
@@ -24,20 +25,26 @@
       </el-table-column>
     </el-table>
     <div class="action-wrapper">
-    <el-button type="primary" id="update-product-count">确定</el-button>
+    <el-button type="primary" id="update-product-count"
+      @click="closeWarehouseProDialog">
+      确定
+    </el-button>
     </div>
   </el-dialog>
 </template>
 
 <script>
 export default {
-  props: ['dialogVisible'],
+  name: 'WarehouseProductDialog',
+
+  props: ['warehouseProDialogVisible'],
 
   data() {
     return {
       // productListMock: this.productList.map(value => Object.assign({ compareIcon: '' }, value)),
       upIcon: 'el-icon-caret-top',
       downIcon: 'el-icon-caret-bottom',
+      productListMock: [],
     };
   },
   methods: {
@@ -64,8 +71,8 @@ export default {
       return sums;
     },
 
-    closeDialog() {
-      this.$emit('closeDialog');
+    closeWarehouseProDialog() {
+      this.$emit('closeWarehouseProDialog');
     },
   },
   computed: {

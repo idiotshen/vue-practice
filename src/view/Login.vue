@@ -11,7 +11,7 @@
               <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-input v-model="form.password" placeholder="密码"></el-input>
+              <el-input type="password" v-model="form.password" placeholder="密码"></el-input>
             </el-form-item>
           </el-form>
         </div>
