@@ -1,7 +1,8 @@
 # vuedemo
 
 > A Vue.js project vue的实践项目 正在施工中  由于实习还有毕业设计的事情  目测进度会很慢
-目前实现了登陆，仓库的创建以及数据拉取
+> 目前实现了登陆，仓库的创建以及数据拉取
+> 刚刚才注意到现在用的webpack3，后面会把它升级到4
 后端项目地址： https://github.com/idiotshen/vue-practice-backend
 ## Build Setup
 
