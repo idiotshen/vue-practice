@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="在库列表" :visible.sync="warehouseProDialogVisible"
+  <el-dialog title="在库列表" :visible.sync="warehouseBookDialogVisible"
     @close="closeWarehouseProDialog">
     <el-table :data="productListMock" show-summary :summary-method="getSummaries">
       <el-table-column property="name" label="产品名称" width="150"></el-table-column>
@@ -35,9 +35,9 @@
 
 <script>
 export default {
-  name: 'WarehouseProductDialog',
+  name: 'WarehouseBookDialog',
 
-  props: ['warehouseProDialogVisible'],
+  props: ['warehouseBookDialogVisible'],
 
   data() {
     return {
@@ -67,7 +67,7 @@ export default {
       sums[0] = '仓库总占地';
       sums[1] = this.totalCover;
       sums[2] = '已用占地';
-      sums[3] = this.warehouseUsedCover;
+      sums[3] = this.warehouseUsedCover();
       return sums;
     },
 

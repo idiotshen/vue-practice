@@ -1,12 +1,6 @@
 <template>
-  <div class="new-warehouse-wrapper">
-    <div class="new-warehouse-header">
-      <div class="new-warehouse-title">
-        <h3>新建仓库</h3>
-      </div>
-    </div>
-    <div class="new-warehouse-panel-wrapper">
-      <el-form ref="form" :model="warehouse" label-width="80px">
+  <el-dialog :visible.sync="createWarehouseDialogVisible" @close="closeCreateWarehouseDialog(false)">
+    <el-form ref="form" :model="warehouse" label-width="80px">
         <el-form-item label="仓库名称">
           <el-input v-model="warehouse.name" style="width: 50%;"></el-input>
         </el-form-item>
@@ -24,8 +18,8 @@
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
-    </div>
-  </div>
+  </el-dialog>
+
 </template>
 
 <script>
@@ -33,6 +27,8 @@ import warehouse from '../../api/warehouse';
 
 export default {
   name: 'NewWarehouse',
+
+  props: ['createWarehouseDialogVisible'],
 
   data() {
     return {
@@ -51,10 +47,14 @@ export default {
           this.$alert('创建成功', '通知', {
             confirmButtonText: '确定',
             callback: () => {
-              this.$router.push({ path: '/home/warehouse-list' });
+              this.closeCreateWarehouseDialog(true);
             },
           });
         });
+    },
+
+    closeCreateWarehouseDialog(flag) {
+      this.$emit('closeCreateWarehouseDialog', flag);
     },
   },
 };

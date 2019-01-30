@@ -1,14 +1,14 @@
 <template>
-  <div class="vendor-list-wrapper">
-    <div class="vendor-list-header">
-      <div class="vendor-list-title">
+  <div class="warehouse-list-wrapper">
+    <div class="warehouse-list-header">
+      <div class="warehouse-list-title">
         <h3>仓库列表</h3>
       </div>
-      <div class="vendor-list-add-vendor">
-        <el-button type="primary" @click="newVendor">新建仓库</el-button>
+      <div class="warehouse-list-add-warehouse">
+        <el-button type="primary" @click="newwarehouse">新建仓库</el-button>
       </div>
     </div>
-    <div class="vendor-table-wrapper">
+    <div class="warehouse-table-wrapper">
       <el-table :data="warehouseList" style="width: 100%;">
         <el-table-column fixed prop="name" label="仓库名称" width="350"></el-table-column>
         <el-table-column prop="location" label="仓库地址" width="350"></el-table-column>
@@ -19,12 +19,12 @@
             <el-input size="mini" placeholder="输入关键字搜索"/>
           </template>
           <template slot-scope="scope">
-            <el-button @click="warehouseProDialogVisible = true"
+            <el-button @click="openDialog(scope.row, 'warehouseBookDialogVisible')"
               type="text" size="small">
               查看在库列表
             </el-button>
             <el-button type="text" size="small">编辑</el-button>
-            <el-button @click="warehouseInputDialogVisible = true"
+            <el-button @click="openDialog(scope.row, 'warehouseInputDialogVisible')"
               type="text" size="small">
               入库
             </el-button>
@@ -32,20 +32,28 @@
         </el-table-column>
       </el-table>
     </div>
-    <warehouse-product-dialog :warehouseId='warehouseId'
-      :warehouseProDialogVisible="warehouseProDialogVisible"
+    <warehouse-product-dialog
+      :warehouseId='warehouseId'
+      :warehouseBookDialogVisible="warehouseBookDialogVisible"
       @closeWarehouseProDialog="closeWarehouseProDialog">
     </warehouse-product-dialog>
     <warehouse-input-dialog
+      :warehouseId='warehouseId'
       @closeWarehouseInputDialog="closeWarehouseInputDialog"
       :warehouseInputDialogVisible="warehouseInputDialogVisible">
     </warehouse-input-dialog>
+    <create-warehouse-dialog
+      @closeCreateWarehouseDialog="closeCreateWarehouseDialog"
+      :createWarehouseDialogVisible="createWarehouseDialogVisible"
+    >
+    </create-warehouse-dialog>
   </div>
 </template>
 
 <script>
-import WarehouseProductDialog from './WarehouseProductDialog';
+import WarehouseBookDialog from './WarehouseBookDialog';
 import WarehouseInputDialog from './WarehouseInputDialog';
+import CreateWarehouseDialog from './createWarehouseDialog';
 
 import warehouse from '../../api/warehouse';
 
@@ -53,26 +61,24 @@ export default {
   name: 'WarehouseList',
 
   components: {
-    'warehouse-product-dialog': WarehouseProductDialog,
+    'warehouse-product-dialog': WarehouseBookDialog,
     'warehouse-input-dialog': WarehouseInputDialog,
+    'create-warehouse-dialog': CreateWarehouseDialog,
   },
 
   mounted() {
-    warehouse.warehouseList()
-      .then((warehouseList) => {
-        this.warehouseList = warehouseList;
-      });
+    this.getWarehouseList();
   },
 
   data() {
     return {
-      warehouseProDialogVisible: false,
+      warehouseBookDialogVisible: false,
 
       warehouseInputDialogVisible: false,
 
-      warehouseId: '',
+      createWarehouseDialogVisible: false,
 
-      productList: [],
+      warehouseId: '',
 
       totalCover: 30,
 
@@ -81,37 +87,56 @@ export default {
   },
 
   methods: {
-    newVendor() {
-      this.$router.push('/home/new-warehouse');
+    getWarehouseList() {
+      warehouse.warehouseList()
+        .then((warehouseList) => {
+          this.warehouseList = warehouseList;
+        });
+    },
+
+    newwarehouse() {
+      this.createWarehouseDialogVisible = true;
+    },
+
+    openDialog(row, dialogArg) {
+      this.warehouseId = row.uid;
+      this[dialogArg] = true;
     },
 
     closeWarehouseProDialog() {
-      this.warehouseProDialogVisible = false;
+      this.warehouseBookDialogVisible = false;
     },
 
     closeWarehouseInputDialog() {
       this.warehouseInputDialogVisible = false;
+    },
+
+    closeCreateWarehouseDialog(flag) {
+      this.createWarehouseDialogVisible = false;
+      if (flag) {
+        this.getWarehouseList();
+      }
     },
   },
 };
 </script>
 
 <style>
-.vendor-list-wrapper {
+.warehouse-list-wrapper {
   height: 100%;
 }
 
-.vendor-list-wrapper .vendor-list-header .vendor-list-title {
+.warehouse-list-wrapper .warehouse-list-header .warehouse-list-title {
   display: inline-block;
   width: fit-content;
   height: 10%;
 }
 
-.vendor-list-wrapper .vendor-list-header .vendor-list-add-vendor {
+.warehouse-list-wrapper .warehouse-list-header .warehouse-list-add-warehouse {
   float: right;
 }
 
-.vendor-list-wrapper .vendor-table-wrapper {
+.warehouse-list-wrapper .warehouse-table-wrapper {
   height: 90%;
 }
 </style>

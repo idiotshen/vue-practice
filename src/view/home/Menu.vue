@@ -6,11 +6,11 @@
     <el-menu background-color="#3f4d67" text-color="#FFFFFF">
       <el-menu-item index="1">
         <i class="el-icon-menu"></i>
-        <router-link slot="title" to="/">仓库管理</router-link>
+        <router-link slot="title" to="/home/warehouse-list">仓库管理</router-link>
       </el-menu-item>
       <el-menu-item index="2">
         <i class="el-icon-document"></i>
-        <router-link slot="title" to='/'>产品管理</router-link>
+        <router-link slot="title" to='/home/product-list'>产品管理</router-link>
       </el-menu-item>
     </el-menu>
   </div>

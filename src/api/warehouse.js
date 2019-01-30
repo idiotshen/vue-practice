@@ -8,4 +8,8 @@ export default {
   createWarehouse({ name, location, totalCover }) {
     return request('post', '/warehouse', { name, location, totalCover });
   },
+
+  warehouseExcludedProductList(warehouseId) {
+    return request('get', `/warehouse/${warehouseId}/excludedProductList`);
+  },
 };

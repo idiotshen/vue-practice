@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import Login from '../view/Login';
 import Home from '../view/home/Home.vue';
 import WarehouseList from '../view/warehouseList/WarehouseList.vue';
-import NewWarehouse from '../view/newWarehouse/NewWarehouse.vue';
+import ProductList from '../view/productList/ProductList.vue';
 
 Vue.use(Router);
 
@@ -28,8 +28,8 @@ const router = new Router({
           component: WarehouseList,
         },
         {
-          path: 'new-warehouse',
-          component: NewWarehouse,
+          path: 'product-list',
+          component: ProductList,
         },
       ],
     },
