@@ -34,6 +34,7 @@
     </div>
     <warehouse-product-dialog
       :warehouseId='warehouseId'
+      :totalCover='totalCover'
       :warehouseBookDialogVisible="warehouseBookDialogVisible"
       @closeWarehouseProDialog="closeWarehouseProDialog">
     </warehouse-product-dialog>
@@ -80,7 +81,7 @@ export default {
 
       warehouseId: '',
 
-      totalCover: 30,
+      totalCover: 0,
 
       warehouseList: [],
     };
@@ -99,7 +100,8 @@ export default {
     },
 
     openDialog(row, dialogArg) {
-      this.warehouseId = row.uid;
+      this.warehouseId = row._id;
+      this.totalCover = row.totalCover;
       this[dialogArg] = true;
     },
 

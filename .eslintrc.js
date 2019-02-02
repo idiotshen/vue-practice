@@ -29,5 +29,8 @@ module.exports = {
       'import/namespace': 2,
       'import/default': 2,
       'import/export': 2,
-    }
+      'max-len': ["error", { "code": 150 }],
+      'no-underscore-dangle': ["error", {"allow": ["_id"]}]
+    },
+    
   }

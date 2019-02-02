@@ -9,7 +9,7 @@
           <el-option v-for="(product,key) in productList"
             :key="key"
             :label="product.name"
-            :value = "product.uid">
+            :value = "product._id">
           </el-option>
         </el-select>
       </el-form-item>
@@ -61,7 +61,7 @@ export default {
 
     changeSelectedProduct(value) {
       this.productList.some((product) => {
-        if (value === product.uid) {
+        if (value === product._id) {
           this.inputProduct.singleCover = product.singleCover;
           return true;
         }
