@@ -1,3 +1,6 @@
+/* eslint-disable import/order */
+/* eslint-disable global-require */
+/* eslint-disable import/no-extraneous-dependencies */
 
 
 const path = require('path');
