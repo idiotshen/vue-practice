@@ -18,6 +18,7 @@ export default {
 
   body, html{
     width: 100%;
+    min-width: 1000px;
     height: 100%;
   }
 

@@ -11,7 +11,9 @@
           <span @click="handleCount(scope.$index, +1)">
             <i class="el-icon-remove-outline"></i>
           </span>
-          <el-input size='small' class="warehouseBook-input" v-model="scope.row.count"></el-input>
+          <div class="table-input-wrapper">
+            <el-input size='small' v-model="scope.row.count"></el-input>
+          </div>
           <span @click="handleCount(scope.$index, -1)">
             <i class="el-icon-circle-plus-outline"></i>
           </span>
@@ -126,14 +128,14 @@ export default {
 };
 </script>
 
-<style scope>
+<style>
   .action-wrapper {
     margin-top: 20px;
     display: flex;
     justify-content: flex-end;
   }
 
-  .warehouseBook-input{
+  .table-input-wrapper{
     display: inline-block;
     width: 50%;
   }
