@@ -32,19 +32,20 @@
         </el-table-column>
       </el-table>
     </div>
-    <warehouse-product-dialog
+    <warehouse-book-dialog
       :warehouseId='warehouseId'
       :totalCover='totalCover'
+      :warehouseName='warehouseName'
       :warehouseBookDialogVisible="warehouseBookDialogVisible"
-      @closeWarehouseProDialog="closeWarehouseProDialog">
-    </warehouse-product-dialog>
+      @closeWarehouseProDialog="closeDialog">
+    </warehouse-book-dialog>
     <warehouse-input-dialog
       :warehouseId='warehouseId'
-      @closeWarehouseInputDialog="closeWarehouseInputDialog"
+      @closeWarehouseInputDialog="closeDialog"
       :warehouseInputDialogVisible="warehouseInputDialogVisible">
     </warehouse-input-dialog>
     <create-warehouse-dialog
-      @closeCreateWarehouseDialog="closeCreateWarehouseDialog"
+      @closeCreateWarehouseDialog="closeDialog"
       :createWarehouseDialogVisible="createWarehouseDialogVisible"
     >
     </create-warehouse-dialog>
@@ -62,7 +63,7 @@ export default {
   name: 'WarehouseList',
 
   components: {
-    'warehouse-product-dialog': WarehouseBookDialog,
+    'warehouse-book-dialog': WarehouseBookDialog,
     'warehouse-input-dialog': WarehouseInputDialog,
     'create-warehouse-dialog': CreateWarehouseDialog,
   },
@@ -102,7 +103,19 @@ export default {
     openDialog(row, dialogArg) {
       this.warehouseId = row._id;
       this.totalCover = row.totalCover;
+      this.warehouseName = row.name;
       this[dialogArg] = true;
+    },
+
+    closeDialog(dialogArg, flag) {
+      this.warehouseId = '';
+      this.totalCover = '';
+      this.warehouseName = '';
+      this[dialogArg] = false;
+
+      if (flag) {
+        this.getWarehouseList();
+      }
     },
 
     closeWarehouseProDialog() {

@@ -6,6 +6,7 @@ import Login from '../view/Login';
 import Home from '../view/home/Home.vue';
 import WarehouseList from '../view/warehouseList/WarehouseList.vue';
 import ProductList from '../view/productList/ProductList.vue';
+import Error from '../view/error/Error.vue';
 
 Vue.use(Router);
 
@@ -14,6 +15,10 @@ const router = new Router({
     {
       path: '/login',
       component: Login,
+    },
+    {
+      path: '/error',
+      component: Error,
     },
     {
       path: '/',
@@ -36,10 +41,11 @@ const router = new Router({
   ],
 });
 
-const EXCLUDE_ROUTER = ['/login'];
+const EXCLUDE_ROUTER = ['/login', '/error'];
 
 router.beforeEach((to, from, next) => {
-  if (Cookies.get('Token') || EXCLUDE_ROUTER.includes(to.path)) {
+  console.log(Cookies.get('token'));
+  if (Cookies.get('token') || EXCLUDE_ROUTER.includes(to.path)) {
     next();
   } else {
     next('/login');

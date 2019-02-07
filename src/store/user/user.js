@@ -13,7 +13,7 @@ const actions = {
     return user.login({ username, password })
       .then((token) => {
         commit('SET_TOKEN', token);
-        Cookies.set('Token', token);
+        Cookies.set('token', token);
       });
   },
 };

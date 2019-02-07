@@ -48,8 +48,8 @@ export default {
   },
 
   methods: {
-    closeWarehouseInputDialog() {
-      this.$emit('closeWarehouseInputDialog');
+    closeWarehouseInputDialog(flag = false) {
+      this.$emit('closeWarehouseInputDialog', 'warehouseInputDialogVisible', flag);
     },
 
     getWarehouseExcludedProductList() {
@@ -76,7 +76,7 @@ export default {
           this.$alert('入库成功', '通知', {
             confirmButtonText: '确定',
             callback: () => {
-              this.closeWarehouseInputDialog();
+              this.closeWarehouseInputDialog(true);
             },
           });
         });

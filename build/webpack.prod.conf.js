@@ -1,3 +1,6 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-plusplus */
+/* eslint-disable global-require */
 /* eslint-disable import/order */
 /* eslint-disable import/no-extraneous-dependencies */
 
