@@ -1,10 +1,11 @@
 # vuedemo
 
-> A Vue.js project vue的实践项目 正在施工中  由于实习还有毕业设计的事情  目测进度会很慢  
-> 目前实现了登陆，仓库的创建以及数据拉取  
-> 刚刚才注意到现在用的webpack3，后面会把它升级到4  
-> 后端项目地址： https://github.com/idiotshen/vue-practice-backend  
-> dome地址：http://111.231.105.43/#/login 首屏加载慢的要死，之后会再优化，也有计划改成服务端渲染，看后续的时间了
+A Vue.js project vue的实践项目 正在施工中  由于实习还有毕业设计的事情  目测进度会很慢  
+目前实现了登陆，仓库的创建以及数据拉取  
+刚刚才注意到现在用的webpack3，后面会把它升级到4  
+后端项目地址： https://github.com/idiotshen/vue-practice-backend  
+dome地址：http://111.231.105.43/#/login  
+首屏加载慢的要死，之后会再优化，也有计划改成服务端渲染，看后续的时间了  
 ## Build Setup
 
 ``` bash
